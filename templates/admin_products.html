@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Manajemen Produk 🥑
+</h1>
+
+<a href="/admin/products/add"
+   class="btn btn-success mb-4">
+
+   Tambah Produk
+
+</a>
+
+<div class="card shadow-sm p-4">
+
+    <table class="table table-bordered">
+
+        <thead class="table-success">
+
+            <tr>
+
+                <th>Produk</th>
+                <th>Harga</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for product in products %}
+
+            <tr>
+
+                <td>{{ product.name }}</td>
+
+                <td>Rp {{ product.price }}</td>
+
+                <td>
+
+                    <a href="/admin/products/edit/{{ product.id }}"
+                       class="btn btn-warning btn-sm">
+
+                       Edit
+
+                    </a>
+
+                    <button class="btn btn-danger delete-btn"
+                            data-url="/admin/products/delete/{{ product.id }}">
+
+                        <i class="bi bi-trash-fill"></i>
+                         
+                        Hapus
+
+                    </button>
+
+                        Hapus
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

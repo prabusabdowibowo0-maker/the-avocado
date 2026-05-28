@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid"><div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <div class="admin-sidebar">
+
+            <h3 class="fw-bold text-success mb-4">Admin Panel</h3>
+
+            <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="/admin/products"><i class="bi bi-box-seam"></i> Produk</a>
+            <a href="/journal"><i class="bi bi-journal-text"></i> Jurnal Umum</a>
+            <a href="/ledger"><i class="bi bi-book"></i> Buku Besar</a>
+            <a href="/trial-balance"><i class="bi bi-bar-chart"></i> Neraca Saldo</a>
+            <a href="/income-statement"><i class="bi bi-cash-stack"></i> Laba Rugi</a>
+            <a href="/closing-entry"><i class="bi bi-x-circle"></i> Jurnal Penutup</a>
+            <a href="/admin/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="admin-content">
+
+
+<h1 class="mb-4">
+    Laporan Laba Rugi 📈
+</h1>
+
+<div class="card shadow-sm p-4">
+
+    <table class="table table-bordered">
+
+        <tr>
+
+            <th>Total Pendapatan</th>
+
+            <td>
+                Rp {{ revenue }}
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <th>Total Harga Pokok Penjualan</th>
+
+            <td>
+                Rp {{ hpp }}
+            </td>
+
+        </tr>
+
+        <tr class="table-success">
+
+            <th>Laba Bersih</th>
+
+            <td>
+                <strong>
+                    Rp {{ profit }}
+                </strong>
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+        </div>
+</div></div>
+{% endblock %}

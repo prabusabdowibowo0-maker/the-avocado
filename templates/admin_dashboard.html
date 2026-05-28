@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+
+        <div class="admin-sidebar">
+
+            <h3 class="fw-bold text-success mb-4">
+
+                Admin Panel
+
+            </h3>
+
+            <a href="/admin">
+                <i class="bi bi-speedometer2"></i>
+                Dashboard
+            </a>
+
+            <a href="/admin/products">
+                <i class="bi bi-box-seam"></i>
+                Produk
+            </a>
+
+            <a href="/journal">
+                <i class="bi bi-journal-text"></i>
+                Jurnal Umum
+            </a>
+
+            <a href="/ledger">
+                <i class="bi bi-book"></i>
+                Buku Besar
+            </a>
+
+            <a href="/trial-balance">
+                <i class="bi bi-bar-chart"></i>
+                Neraca Saldo
+            </a>
+
+            <a href="/income-statement">
+                <i class="bi bi-cash-stack"></i>
+                Laba Rugi
+            </a>
+
+            <a href="/closing-entry">
+                <i class="bi bi-x-circle"></i>
+                Jurnal Penutup
+            </a>
+
+            <a href="/admin/logout">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </a>
+
+        </div>
+
+        <!-- CONTENT -->
+
+        <div class="admin-content">
+
+            <h1 class="fw-bold mb-4">
+
+                Dashboard Admin
+
+            </h1>
+
+            <a href="/export-pdf"
+               class="btn btn-success mb-4">
+
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+
+                Export PDF
+
+            </a>
+
+            <!-- CARD -->
+
+            <div class="row g-4 mb-5">
+
+                <div class="col-lg-4">
+
+                    <div class="card dashboard-card">
+
+                        <div class="card-body">
+
+                            <div class="dashboard-icon mb-3">
+
+                                <i class="bi bi-currency-dollar"></i>
+
+                            </div>
+
+                            <h5>Total Penjualan</h5>
+
+                            <h2 class="fw-bold text-success">
+
+                                Rp {{ total_sales }}
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="card dashboard-card">
+
+                        <div class="card-body">
+
+                            <div class="dashboard-icon mb-3">
+
+                                <i class="bi bi-box-seam"></i>
+
+                            </div>
+
+                            <h5>Total Produk</h5>
+
+                            <h2 class="fw-bold text-success">
+
+                                {{ total_products }}
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="card dashboard-card">
+
+                        <div class="card-body">
+
+                            <div class="dashboard-icon mb-3">
+
+                                <i class="bi bi-receipt"></i>
+
+                            </div>
+
+                            <h5>Total Transaksi</h5>
+
+                            <h2 class="fw-bold text-success">
+
+                                {{ total_transactions }}
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CHART -->
+
+            <div class="card dashboard-card">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-4">
+
+                        Statistik Penjualan
+
+                    </h4>
+
+                    <canvas id="salesChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('salesChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+
+        datasets: [{
+
+            label: 'Penjualan',
+
+            data: [120, 190, 300, 250, 400, 350, 500],
+
+            tension: 0.4
+
+        }]
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

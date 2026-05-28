@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm p-4">
+
+            <h2 class="mb-4">
+                Tambah Produk
+            </h2>
+
+            <form method="POST"
+                enctype="multipart/form-data"
+                onsubmit="return confirm('Tambah produk baru?')">
+
+                <div class="mb-3">
+
+                    <label>Nama Produk</label>
+                    <input type="text"
+                           name="name"
+                           class="form-control">
+
+                <div class="mb-3">
+
+                    <label>Upload Gambar</label>
+
+                     <input type="file"
+                            name="image"
+                            class="form-control">
+
+                 </div>
+
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Harga</label>
+
+                    <input type="number"
+                           name="price"
+                           class="form-control">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Harga Modal / HPP</label>
+
+                    <input type="number"
+                            name="cost"
+                            class="form-control">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Upload Gambar</label>
+
+                    <input type="file"
+                           name="image"
+                           class="form-control">
+
+                </div>
+
+                <button class="btn btn-success w-100">
+
+                    Simpan Produk
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

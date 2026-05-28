@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <div class="hero-section mb-5">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="hero-title">
+                    Solusi Pertanian Modern
+                </h1>
+
+                <p class="hero-subtitle">
+                    Bibit, pupuk, buah segar,
+                    dan kebutuhan pertanian
+                    dalam satu platform.
+                </p>
+
+                <a href="#productSection"
+                   class="btn btn-success btn-lg">
+
+                    Belanja Sekarang
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1200"
+                     class="hero-image">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="mb-4">
+
+        <input type="text"
+               id="searchInput"
+               class="form-control search-box"
+               placeholder="Cari produk pertanian...">
+
+    </div>
+
+    <!-- PRODUCT -->
+
+    <div id="productSection">
+
+        <div class="row g-4"
+             id="productContainer">
+
+            {% for product in products %}
+
+            <div class="col-lg-3 col-md-6 product-item">
+
+                <div class="card product-card h-100">
+
+                    <img src="{{ url_for('static', filename=product.image) }}"
+                         class="card-img-top">
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h5 class="fw-bold">
+                            {{ product.name }}
+                        </h5>
+
+                        <p class="text-success fw-bold fs-5">
+                            Rp {{ product.price }}
+                        </p>
+
+                        <a href="/add_to_cart/{{ product.id }}" 
+                           class="btn btn-success mt-auto add-cart-btn">
+                            <i class="bi bi-cart-plus-fill"></i>
+                            Add To Cart
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
