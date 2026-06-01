@@ -1,185 +1,64 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
 <div class="container">
-
     <div class="checkout-wrapper">
-
         <div class="row g-4">
 
-            <!-- LEFT -->
-
             <div class="col-lg-7">
-
                 <div class="card payment-card">
-
                     <div class="card-body">
-
-                        <h3 class="fw-bold mb-4">
-
-                            Pembayaran
-
-                        </h3>
-
-                        <form method="POST"
-                              id="paymentForm">
-
-                            <!-- PAYMENT METHOD -->
+                        <h3 class="fw-bold mb-4">Pembayaran</h3>
+                        <form method="POST" id="paymentForm">
 
                             <div class="mb-4">
-
-                                <label class="fw-bold mb-2">
-
-                                    Pilih Metode Pembayaran
-
-                                </label>
-
-                                <select class="form-select payment-select"
-                                        name="payment_method">
-
-                                    <option value="Cash">
-                                        Cash
-                                    </option>
-
-                                    <option value="QRIS">
-                                        QRIS
-                                    </option>
-
+                                <label class="fw-bold mb-2">Pilih Metode Pembayaran</label>
+                                <select class="form-select payment-select" name="payment_method" required>
+                                    <option value="">-- Pilih Metode --</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="QRIS">QRIS</option>
                                 </select>
-
                             </div>
 
-                            <!-- QRIS -->
-
-                            <div class="qris-box text-center mb-4"
-                                 id="qrisBox">
-
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=TheAvocadosPayment"
-                                     class="img-fluid qris-image">
-
-                                <p class="mt-3 text-muted">
-                                    Scan QRIS untuk pembayaran
-                                </p>
-
-                            </div>
-
-                            <!-- BUTTON -->
-
-                            <button type="submit"
-                                    class="btn btn-success w-100 payment-btn">
-
+                            <button type="submit" class="btn btn-success w-100 payment-btn">
                                 Bayar Sekarang
-
                             </button>
 
                         </form>
-
                     </div>
-
                 </div>
-
             </div>
-
-            <!-- RIGHT -->
 
             <div class="col-lg-5">
-
                 <div class="card summary-card">
-
                     <div class="card-body">
-
-                        <h4 class="fw-bold mb-4">
-
-                            Ringkasan Pesanan
-
-                        </h4>
-
+                        <h4 class="fw-bold mb-4">Ringkasan Pesanan</h4>
                         {% for item in cart_items %}
-
-                        <div class="d-flex justify-content-between mb-3">
-
-                            <span>
-                                {{ item.name }}
-                            </span>
-
-                            <strong>
-                                Rp {{ item.price }}
-                            </strong>
-
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ item.name }} x{{ item.quantity }}</span>
+                            <strong>{{ (item.price * item.quantity) | format_currency }}</strong>
                         </div>
-
                         {% endfor %}
-
                         <hr>
-
                         <div class="d-flex justify-content-between">
-
                             <h5>Total</h5>
-
-                            <h5 class="text-success fw-bold">
-                                Rp {{ total }}
-                            </h5>
-
+                            <h5 class="text-success fw-bold">{{ total | format_currency }}</h5>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
         </div>
-
     </div>
-
 </div>
 
-<!-- PAYMENT SUCCESS MODAL -->
-
-<div class="modal fade"
-     id="successModal"
-     tabindex="-1">
-
+<!-- PAYMENT MODAL (CASH / QRIS) -->
+<div class="modal fade" id="paymentModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content success-modal">
-
             <div class="modal-body text-center p-5">
-
-                <div class="success-icon">
-
-                    <i class="bi bi-check-circle-fill"></i>
-
-                </div>
-
-                <h2 class="mt-4 fw-bold text-success">
-
-                    Pembayaran Berhasil
-
-                </h2>
-
-                <p class="text-muted">
-
-                    Terima kasih telah berbelanja
-                    di The Avocados
-
-                </p>
-
-                <a href="/receipt/Cash"
-                   id="receiptLink"
-                   class="btn btn-success mt-3 px-4">
-
-                    Lihat Struk
-
-                </a>
-
+                <div id="paymentContent"></div>
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

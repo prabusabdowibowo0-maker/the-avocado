@@ -1,80 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
 <div class="row justify-content-center">
-
     <div class="col-md-6">
-
         <div class="card shadow-sm p-4">
-
-            <h2 class="mb-4">
-                Edit Produk
-            </h2>
-
-            <form method="POST"
-                enctype="multipart/form-data"
-                onsubmit="return confirm('Simpan perubahan produk?')">
-
+            <h2 class="mb-4">Edit Produk</h2>
+            <form method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
-
-                    <label>Nama Produk</label>
-
-                    <input type="text"
-                           name="name"
-                           value="{{ product.name }}"
-                           class="form-control">
-
+                    <label class="fw-bold">Nama Produk</label>
+                    <input type="text" name="name" value="{{ product.name }}" class="form-control" required>
                 </div>
-
                 <div class="mb-3">
-
-                    <label>Harga</label>
-
-                    <input type="number"
-                           name="price"
-                           value="{{ product.price }}"
-                           class="form-control">
-
+                    <label class="fw-bold">Harga Jual</label>
+                    <input type="number" name="price" value="{{ product.price }}" class="form-control" required>
                 </div>
-
-                    <div class="mb-3">
-    
-                        <label>Harga Modal / HPP</label>
-    
-                        <input type="number"
-                                name="cost"
-                                value="{{ product.cost }}"
-                                class="form-control">
-
-                </div>
-
                 <div class="mb-3">
-
-                        <label>Upload Gambar</label>
-
-                                <input type="file"
-                                       name="image"
-                                       class="form-control">
-
+                    <label class="fw-bold">Harga Modal / HPP</label>
+                    <input type="number" name="cost" value="{{ product.cost }}" class="form-control" required>
                 </div>
-
-                    Update Produk
-
-                <button type="submit"
-                        class="btn btn-warning"
-                        onclick="return confirm('Yakin ingin update produk ini?')">
-
-                        Update Produk
-
-                </button>
-
+                <div class="mb-3">
+                    <label class="fw-bold">Stok</label>
+                    <input type="number" name="stock" value="{{ product.stock }}" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Upload Gambar Baru (opsional)</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Update Produk</button>
             </form>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

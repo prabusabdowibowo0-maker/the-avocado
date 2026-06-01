@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar">
+        <h3 class="fw-bold text-success mb-4">Admin Panel</h3>
+        <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="/admin/products"><i class="bi bi-box-seam"></i> Produk</a>
+        <a href="/admin/modal"><i class="bi bi-cash-coin"></i> Modal Awal</a>
+        <a href="/journal"><i class="bi bi-journal-text"></i> Jurnal Umum</a>
+        <a href="/ledger"><i class="bi bi-book"></i> Buku Besar</a>
+        <a href="/trial-balance"><i class="bi bi-bar-chart"></i> Neraca Saldo</a>
+        <a href="/income-statement"><i class="bi bi-cash-stack"></i> Laba Rugi</a>
+        <a href="/closing-entry"><i class="bi bi-x-circle"></i> Jurnal Penutup</a>
+        <a href="/admin/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+
+        <h1 class="fw-bold mb-4">Modal Awal 💰</h1>
+
+        <!-- FORM TAMBAH MODAL -->
+        <div class="card dashboard-card p-4 mb-4">
+            <h5 class="fw-bold mb-3">Tambah Modal</h5>
+            <form method="POST" action="/admin/modal">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="fw-bold">Jumlah Modal (Rp)</label>
+                        <input type="number" name="amount" class="form-control" required placeholder="contoh: 5000000">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold">Keterangan</label>
+                        <input type="text" name="description" class="form-control" placeholder="misal: Modal awal bulan Juni">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-success w-100">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- TABEL RIWAYAT -->
+        <div class="card dashboard-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Riwayat Modal</h5>
+                <span class="badge bg-success fs-6">Total: {{ total_modal | format_currency }}</span>
+            </div>
+
+            {% if modals %}
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th class="text-end">Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in modals %}
+                    <tr>
+                        <td>{{ m.date.strftime('%d %B %Y, %H:%M') }}</td>
+                        <td>{{ m.description if m.description else '-' }}</td>
+                        <td class="text-end">{{ m.amount | format_currency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="text-center py-4 text-muted">
+                <i class="bi bi-inbox display-4"></i>
+                <p class="mt-2">Belum ada data modal. Tambahkan modal di atas.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}

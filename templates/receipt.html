@@ -1,103 +1,66 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
 <div class="container">
-
     <div class="receipt-wrapper">
 
         <div class="text-center mb-4">
-
-            <h1 class="fw-bold text-success">
-                The Avocados
-            </h1>
-
-            <p class="text-muted">
-                Smart Agriculture Ecommerce
-            </p>
-
+            <h1 class="fw-bold text-success">🥑 The Avocados</h1>
+            <p class="text-muted">Smart Agriculture Ecommerce</p>
         </div>
 
         <hr>
 
         <div class="mb-4">
-
-            <p>
-                <strong>Tanggal:</strong>
-                {{ date }}
-            </p>
-
-            <p>
-                <strong>Metode Pembayaran:</strong>
-                {{ payment_method }}
-            </p>
-
+            <p><strong>Tanggal:</strong> {{ date }}</p>
+            <p><strong>Metode Pembayaran:</strong> {{ payment_method }}</p>
         </div>
 
-        <table class="table">
-
-            <thead>
-
+        <table class="table table-bordered">
+            <thead class="table-success">
                 <tr>
-
                     <th>Produk</th>
-                    <th>Harga</th>
-
+                    <th class="text-center">Qty</th>
+                    <th class="text-end">Harga Satuan</th>
+                    <th class="text-end">Subtotal</th>
                 </tr>
-
             </thead>
-
             <tbody>
-
                 {% for item in cart_items %}
-
                 <tr>
-
-                    <td>
-                        {{ item.name }}
-                    </td>
-
-                    <td>
-                        Rp {{ item.price }}
-                    </td>
-
+                    <td>{{ item.name }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-end">{{ item.price | format_currency }}</td>
+                    <td class="text-end">{{ (item.price * item.quantity) | format_currency }}</td>
                 </tr>
-
                 {% endfor %}
-
             </tbody>
-
         </table>
 
-        <div class="text-end mt-4">
-
-            <h4 class="text-success fw-bold">
-
-                Total:
-                Rp {{ total }}
-
-            </h4>
-
+        <div class="text-end mt-3">
+            <h4 class="text-success fw-bold">Total: {{ total | format_currency }}</h4>
         </div>
 
-        <div class="text-center mt-5">
+        <hr>
 
-            <button onclick="window.print()"
-                    class="btn btn-success me-2">
-                <i class="bi bi-printer-fill"></i>
-                Print Struk
+        <div class="text-center mt-4 p-4 bg-light rounded">
+            <p class="fs-5 fw-bold text-success">
+                "Investasi terbaik adalah investasi pada kesehatan. 🌱"
+            </p>
+            <p class="text-muted">
+                Terima kasih telah berbelanja di The Avocados!<br>
+                Semoga hari-harimu semakin hijau dan sehat. 💚
+            </p>
+        </div>
+
+        <div class="text-center mt-4">
+            <button onclick="window.print()" class="btn btn-success me-2">
+                <i class="bi bi-printer-fill"></i> Print Struk
             </button>
-
-            <a href="/"
-               class="btn btn-outline-success">
-                <i class="bi bi-house-fill"></i>
-                Kembali ke Home
+            <a href="/" class="btn btn-outline-success">
+                <i class="bi bi-house-fill"></i> Kembali ke Home
             </a>
-
         </div>
 
     </div>
-
 </div>
-
 {% endblock %}

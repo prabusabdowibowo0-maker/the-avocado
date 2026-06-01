@@ -5,19 +5,17 @@
 
         <!-- SIDEBAR -->
         <div class="admin-sidebar">
-
-            <h3 class="fw-bold text-success mb-4">Admin Panel</h3>
-
-            <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
-            <a href="/admin/products"><i class="bi bi-box-seam"></i> Produk</a>
-            <a href="/journal"><i class="bi bi-journal-text"></i> Jurnal Umum</a>
-            <a href="/ledger"><i class="bi bi-book"></i> Buku Besar</a>
-            <a href="/trial-balance"><i class="bi bi-bar-chart"></i> Neraca Saldo</a>
-            <a href="/income-statement"><i class="bi bi-cash-stack"></i> Laba Rugi</a>
-            <a href="/closing-entry"><i class="bi bi-x-circle"></i> Jurnal Penutup</a>
-            <a href="/admin/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-
-        </div>
+        <h3 class="fw-bold text-success mb-4">Admin Panel</h3>
+        <a href="/admin"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a href="/admin/products"><i class="bi bi-box-seam"></i> Produk</a>
+        <a href="/admin/modal"><i class="bi bi-cash-coin"></i> Modal Awal</a>
+        <a href="/journal"><i class="bi bi-journal-text"></i> Jurnal Umum</a>
+        <a href="/ledger"><i class="bi bi-book"></i> Buku Besar</a>
+        <a href="/trial-balance"><i class="bi bi-bar-chart"></i> Neraca Saldo</a>
+        <a href="/income-statement"><i class="bi bi-cash-stack"></i> Laba Rugi</a>
+        <a href="/closing-entry"><i class="bi bi-x-circle"></i> Jurnal Penutup</a>
+        <a href="/admin/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </div>
 
         <!-- CONTENT -->
         <div class="admin-content">
@@ -54,7 +52,7 @@
                 <td>
 
                     {% if item.debit > 0 %}
-                        Rp {{ item.debit }}
+                        {{ item.debit | format_currency }}
                     {% endif %}
 
                 </td>
@@ -62,7 +60,7 @@
                 <td>
 
                     {% if item.credit > 0 %}
-                        Rp {{ item.credit }}
+                        {{ item.credit | format_currency }}
                     {% endif %}
 
                 </td>
